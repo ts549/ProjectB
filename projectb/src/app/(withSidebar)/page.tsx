@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { User, UserCircle, User2 } from "lucide-react";
-import data from "./data.json";
+import data from "../data.json";
 // Add a utility class for hiding scrollbars
 const hideScrollbar = "scrollbar-hide";
 
@@ -218,7 +218,7 @@ export default function Home() {
           {/* Inner box: chat input, always at the bottom, centered with padding */}
           <div className="w-full flex justify-center items-center">
             <form
-              className="flex items-center gap-2 bg-white dark:bg-slate-700/60 rounded-lg shadow px-4 py-2 w-full"
+              className="flex items-center gap-2 bg-white rounded-lg shadow px-4 py-2 w-full"
               style={{ boxSizing: "border-box" }}
               onSubmit={(e) => {
                 e.preventDefault();
@@ -233,11 +233,11 @@ export default function Home() {
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 placeholder="Type a message..."
-                className="flex-1 bg-transparent outline-none text-sm px-2"
+                className="flex-1 bg-transparent outline-none text-sm px-2 text-black placeholder:text-gray-500"
               />
               <button
                 type="submit"
-                className="px-3 py-1 rounded bg-primary text-primary-foreground text-xs font-medium hover:bg-primary/90 transition"
+                className="px-3 py-1 rounded bg-slate-700 text-white text-xs font-medium hover:bg-slate-600 transition"
               >
                 Send
               </button>
