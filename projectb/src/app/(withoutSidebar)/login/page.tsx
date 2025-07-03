@@ -1,11 +1,20 @@
 "use client";
+
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 import { signIn } from "next-auth/react";
+import { useEffect } from "react";
 
 export default function LoginPage() {
+  const { data: session } = useSession();
   const googleAuth = () => {
-    signIn("google", { callbackUrl: "/" });
+    console.log(session);
+    signIn("google", { callback: "/login" });
   };
+
+  useEffect(() => {
+    console.log(session);
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground">

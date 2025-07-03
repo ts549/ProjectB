@@ -23,13 +23,5 @@ export default function LoginLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" className="dark">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${quicksand.variable} antialiased`}
-      >
-        <main>{children}</main>
-      </body>
-    </html>
-  );
+  return <main>{children}</main>;
 }

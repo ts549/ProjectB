@@ -1,15 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { User, UserCircle, User2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { Skeleton } from "@/components/ui/skeleton";
 import data from "../data.json";
 // Add a utility class for hiding scrollbars
 const hideScrollbar = "scrollbar-hide";
 
 export default function Home() {
+  const { data: session, status } = useSession();
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [updatesToShow, setUpdatesToShow] = useState(3);
   const [activeAccount, setActiveAccount] = useState(0);
@@ -48,6 +54,26 @@ export default function Home() {
       )
     );
     setSelectedEmailId(id);
+  }
+
+  useEffect(() => {
+    if (status === "loading") return;
+    if (!session) {
+      router.push("/login");
+      return;
+    }
+    setLoading(false);
+  }, [session, status]);
+
+  if (loading) {
+    return (
+      <div className="h-screen w-screen absolute not-visited:flex flex-col items-center justify-center min-h-screen bg-background text-foreground">
+        <Skeleton className="w-24 h-24 mb-4" />
+        <span className="text-lg text-muted-foreground animate-pulse">
+          Loading...
+        </span>
+      </div>
+    );
   }
 
   return (
